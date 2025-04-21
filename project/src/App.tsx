@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useStudentStore } from './store/useStudentStore';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import { SectionType } from './types';
 import AllSections from './components/AllSections';
 import SingleSection from './components/SingleSection';
@@ -47,30 +47,41 @@ function App() {
   };
 
   return (
-    <SectionProvider>
-      <div className="min-h-screen bg-gray-900">
-        <Routes>
-          <Route path="/" element={<AllSections sections={sections} />} />
-          <Route path="/section/:sectionId" element={<SingleSection sections={sections} />} />
-        </Routes>
-        <Toaster 
-          position="top-center"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: '#333',
-              color: '#fff',
-              direction: 'rtl'
-            },
+    <HashRouter>
+      <SectionProvider>
+        <div 
+          className="min-h-screen w-full"
+          style={{
+            backgroundImage: 'url("/Background.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed'
           }}
-        />
-        {showAdmin && (
-          <div className="fixed bottom-4 left-4">
-            <RegistrationForm onAddStudent={handleAddStudent} />
-          </div>
-        )}
-      </div>
-    </SectionProvider>
+        >
+          <Routes>
+            <Route path="/" element={<AllSections sections={sections} />} />
+            <Route path="/section/:sectionId" element={<SingleSection sections={sections} />} />
+          </Routes>
+          <Toaster 
+            position="top-center"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: '#333',
+                color: '#fff',
+                direction: 'rtl'
+              },
+            }}
+          />
+          {showAdmin && (
+            <div className="fixed bottom-4 left-4 z-50">
+              <RegistrationForm onAddStudent={handleAddStudent} />
+            </div>
+          )}
+        </div>
+      </SectionProvider>
+    </HashRouter>
   );
 }
 
