@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { SectionData, Student } from '../types';
-import { ArrowRight, Users, ChevronLeft, ChevronRight } from 'lucide-react';
+import { SectionData, Student, SectionType } from '../types';
+import { ArrowRight, Users, ChevronLeft, ChevronRight, Trash2 } from 'lucide-react';
 import CelebrationView from './CelebrationView';
 import { useSectionContext } from '../context/SectionContext';
+import { useStudentStore } from '../store/useStudentStore';
 
 interface SingleSectionProps {
   sections: SectionData[];
@@ -13,6 +14,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
   const { sectionId } = useParams();
   const section = sections.find(s => s.id === sectionId);
   const { showCelebration, celebrationStudents, triggerCelebration, endCelebration } = useSectionContext();
+  const deleteStudent = useStudentStore(state => state.deleteStudent);
   
   // العثور على القسم السابق والتالي
   const currentIndex = sections.findIndex(s => s.id === sectionId);
@@ -40,6 +42,15 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
       localStorage.setItem(storedKey, currentStudents.length.toString());
     }
   }, [section?.students, section?.id, triggerCelebration]);
+
+  const handleDelete = async (student: Student, position: number) => {
+    if (window.confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+      const result = await deleteStudent(student.id, sectionId as SectionType, position + 1);
+      if (!result.success) {
+        alert(result.message || 'حدث خطأ أثناء الحذف');
+      }
+    }
+  };
 
   if (!section) {
     return (
@@ -150,13 +161,20 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                   {index + 1}
                 </div>
                 {student ? (
-                  <div className="text-center">
+                  <div className="text-center relative">
                     <div className="text-xl text-white font-bold mb-2">
                       {student.name}
                     </div>
-                    <div className="text-white/60 text-sm">
+                    <div className="text-white/60 text-sm mb-2">
                       طالب مسجل
                     </div>
+                    <button
+                      onClick={() => handleDelete(student, index)}
+                      className="absolute top-0 left-0 p-2 text-white/60 hover:text-red-500 transition-colors"
+                      title="حذف الطالب"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </button>
                   </div>
                 ) : (
                   <div className="text-center">
