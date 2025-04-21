@@ -11,11 +11,13 @@ interface CelebrationStudent extends Student {
 interface CelebrationViewProps {
   students: CelebrationStudent[];
   sectionColor: string;
+  onComplete: () => void;
 }
 
 const CelebrationView: React.FC<CelebrationViewProps> = ({
   students,
   sectionColor,
+  onComplete
 }) => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [phase, setPhase] = useState<'announcement' | 'name'>('announcement');
@@ -154,7 +156,9 @@ const CelebrationView: React.FC<CelebrationViewProps> = ({
               launchConfetti();
               setTimeout(() => {
                 launchConfetti();
-                setTimeout(endCelebration, 2000);
+                setTimeout(() => {
+                  endCelebration();
+                }, 2000);
               }, 1500);
             }, 1500);
           } else {
