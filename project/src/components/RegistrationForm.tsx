@@ -109,10 +109,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onAddStudent }) => 
       );
 
       if (result.success) {
-        // تحديث القائمة مباشرة بإزالة الطالب المحذوف
-        setStudents(prevStudents => prevStudents.filter(s => s.id !== id));
         setAlert({ type: 'success', message: 'تم الحذف بنجاح' });
-        // تحديث القائمة من قاعدة البيانات
         await fetchStudents();
       } else {
         setAlert({ type: 'error', message: result.message || 'حدث خطأ أثناء الحذف' });
