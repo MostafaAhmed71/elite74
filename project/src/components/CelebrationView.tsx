@@ -217,13 +217,13 @@ const CelebrationView: React.FC<CelebrationViewProps> = ({
               {phase === 'announcement' ? (
                 <div className="text-4xl font-bold text-white mb-4">
                   {students[currentIndex].number === 1 ? (
-                    <span>🏆 المركز الأول 🏆</span>
+                    <span>✨ المتأهل الأول ✨</span>
                   ) : students[currentIndex].number === 2 ? (
-                    <span>🥈 المركز الثاني 🥈</span>
+                    <span>✨ المتأهل الثاني ✨</span>
                   ) : students[currentIndex].number === 3 ? (
-                    <span>🥉 المركز الثالث 🥉</span>
+                    <span>✨ المتأهل الثالث ✨</span>
                   ) : (
-                    <span>المركز {students[currentIndex].number}</span>
+                    <span>المتأهل رقم {students[currentIndex].number}</span>
                   )}
                 </div>
               ) : (
