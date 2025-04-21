@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SectionType } from '../types';
 import { ClipboardList, Pencil, Trash2, X, Check } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useStudentStore } from '../store/useStudentStore';
 
 interface RegistrationFormProps {
   onAddStudent: (name: string, section: SectionType) => Promise<{
@@ -26,6 +27,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onAddStudent }) => 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const deleteStudent = useStudentStore(state => state.deleteStudent);
 
   useEffect(() => {
     fetchStudents();
@@ -92,43 +94,32 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onAddStudent }) => 
     try {
       setIsDeleting(true);
       
-      // First, get the student's details
+      // Get the student's details
       const studentToDelete = students.find(s => s.id === id);
-      if (!studentToDelete) return;
-
-      // Delete the student
-      const { error: deleteError } = await supabase
-        .from('students')
-        .delete()
-        .eq('id', id);
-
-      if (deleteError) throw deleteError;
-
-      // Update positions for remaining students in the same section
-      const { data: sectionStudents } = await supabase
-        .from('students')
-        .select('*')
-        .eq('section', studentToDelete.section)
-        .order('position');
-
-      if (sectionStudents) {
-        // Update positions for students after the deleted one
-        for (const student of sectionStudents) {
-          if (student.position > studentToDelete.position) {
-            const { error: updateError } = await supabase
-              .from('students')
-              .update({ position: student.position - 1 })
-              .eq('id', student.id);
-            
-            if (updateError) throw updateError;
-          }
-        }
+      if (!studentToDelete) {
+        setAlert({ type: 'error', message: 'لم يتم العثور على الطالب' });
+        return;
       }
 
-      setAlert({ type: 'success', message: 'تم الحذف بنجاح' });
-      fetchStudents();
+      // Delete using the store function
+      const result = await deleteStudent(
+        id,
+        studentToDelete.section as SectionType,
+        studentToDelete.position
+      );
+
+      if (result.success) {
+        // تحديث القائمة مباشرة بإزالة الطالب المحذوف
+        setStudents(prevStudents => prevStudents.filter(s => s.id !== id));
+        setAlert({ type: 'success', message: 'تم الحذف بنجاح' });
+        // تحديث القائمة من قاعدة البيانات
+        await fetchStudents();
+      } else {
+        setAlert({ type: 'error', message: result.message || 'حدث خطأ أثناء الحذف' });
+      }
     } catch (error) {
-      setAlert({ type: 'error', message: 'حدث خطأ أثناء الحذف' });
+      setAlert({ type: 'error', message: 'حدث خطأ غير متوقع أثناء الحذف' });
+      console.error('خطأ في حذف الطالب:', error);
     } finally {
       setIsDeleting(false);
     }

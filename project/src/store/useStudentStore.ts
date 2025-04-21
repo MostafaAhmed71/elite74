@@ -159,14 +159,33 @@ const createStudentStore: StateCreator<StudentStore> = (set, get) => {
           return { success: false, message: 'حدث خطأ أثناء حذف الطالب' };
         }
 
-        // تحديث مواقع الطلاب الباقين
-        const { error: updateError } = await supabase.rpc('update_positions_after_delete', {
-          p_section_id: sectionId,
-          p_deleted_position: position
-        });
+        // الحصول على جميع الطلاب في نفس القسم
+        const { data: sectionStudents, error: fetchError } = await supabase
+          .from('students')
+          .select('*')
+          .eq('section', sectionId)
+          .order('position');
 
-        if (updateError) {
-          console.error('خطأ في تحديث المواقع:', updateError);
+        if (fetchError) {
+          console.error('خطأ في جلب طلاب القسم:', fetchError);
+          return { success: false, message: 'حدث خطأ أثناء تحديث المواقع' };
+        }
+
+        // تحديث مواقع الطلاب الباقين
+        if (sectionStudents) {
+          for (const student of sectionStudents) {
+            if (student.position > position) {
+              const { error: updateError } = await supabase
+                .from('students')
+                .update({ position: student.position - 1 })
+                .eq('id', student.id);
+
+              if (updateError) {
+                console.error('خطأ في تحديث موقع الطالب:', updateError);
+                return { success: false, message: 'حدث خطأ أثناء تحديث المواقع' };
+              }
+            }
+          }
         }
 
         // تحديث الواجهة

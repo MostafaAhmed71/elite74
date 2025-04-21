@@ -5,6 +5,7 @@ import { ArrowRight, Users, ChevronLeft, ChevronRight, Trash2 } from 'lucide-rea
 import CelebrationView from './CelebrationView';
 import { useSectionContext } from '../context/SectionContext';
 import { useStudentStore } from '../store/useStudentStore';
+import toast from 'react-hot-toast';
 
 interface SingleSectionProps {
   sections: SectionData[];
@@ -46,8 +47,10 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
   const handleDelete = async (student: Student, position: number) => {
     if (window.confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
       const result = await deleteStudent(student.id, sectionId as SectionType, position + 1);
-      if (!result.success) {
-        alert(result.message || 'حدث خطأ أثناء الحذف');
+      if (result.success) {
+        toast.success('تم حذف الطالب بنجاح');
+      } else {
+        toast.error(result.message || 'حدث خطأ أثناء الحذف');
       }
     }
   };
@@ -168,13 +171,6 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                     <div className="text-white/60 text-sm mb-2">
                       طالب مسجل
                     </div>
-                    <button
-                      onClick={() => handleDelete(student, index)}
-                      className="absolute top-0 left-0 p-2 text-white/60 hover:text-red-500 transition-colors"
-                      title="حذف الطالب"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
                   </div>
                 ) : (
                   <div className="text-center">
