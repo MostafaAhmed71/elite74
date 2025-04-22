@@ -8,6 +8,7 @@ import CombinedSections from './components/CombinedSections';
 import RegistrationForm from './components/RegistrationForm';
 import { SectionProvider } from './context/SectionContext';
 import { Toaster } from 'react-hot-toast';
+import AllSectionsView from './components/AllSectionsView';
 
 function App() {
   const { sections, addStudent, fetchStudents, startAutoRefresh, stopAutoRefresh } = useStudentStore();
@@ -68,6 +69,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AllSections sections={sections} />} />
           <Route path="/section/:sectionId" element={<SingleSection sections={sections} />} />
+          <Route path="/all-students" element={<AllSectionsView sections={sections} />} />
         </Routes>
         <Toaster 
           position="top-center"
