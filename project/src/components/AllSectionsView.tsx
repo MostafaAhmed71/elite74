@@ -45,10 +45,10 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                   .map((student, index) => (
                     <div 
                       key={student?.id || index} 
-                      className="p-2.5 rounded-lg text-white text-sm font-bold hover:bg-white/10 transition-colors relative overflow-hidden"
+                      className="p-2.5 rounded-lg text-white text-sm font-bold"
                       style={{ 
                         backgroundColor: section.color,
-                        boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.3)'
+                        boxShadow: 'none'
                       }}
                     >
                       {student?.name}
