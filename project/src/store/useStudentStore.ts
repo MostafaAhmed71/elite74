@@ -14,6 +14,12 @@ interface StudentStore {
 
 const initialSections: SectionData[] = [
   {
+    id: 'universal',
+    title: 'القسم العالمي',
+    color: '#2196F3', // أزرق
+    students: Array(15).fill(null),
+  },
+  {
     id: 'elementary',
     title: 'القسم الابتدائي',
     color: '#4CAF50', // أخضر
@@ -22,19 +28,13 @@ const initialSections: SectionData[] = [
   {
     id: 'middle',
     title: 'القسم المتوسط',
-    color: '#2196F3', // أزرق
+    color: '#FF9800', // برتقالي
     students: Array(15).fill(null),
   },
   {
     id: 'secondary',
     title: 'القسم الثانوي',
     color: '#9C27B0', // بنفسجي
-    students: Array(15).fill(null),
-  },
-  {
-    id: 'universal',
-    title: 'القسم العالمي',
-    color: '#FF9800', // برتقالي
     students: Array(15).fill(null),
   },
 ];
