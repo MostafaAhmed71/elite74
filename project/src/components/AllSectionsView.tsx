@@ -45,13 +45,21 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                   .map((student, index) => (
                     <div 
                       key={student?.id || index} 
-                      className="p-2.5 rounded-lg text-white text-sm font-bold hover:bg-white/20 transition-colors"
+                      className="p-2.5 rounded-lg text-white text-sm font-bold hover:bg-white/20 transition-colors relative overflow-hidden"
                       style={{ 
-                        backgroundColor: `${section.color}ee`,
-                        boxShadow: 'inset 0 0 30px rgba(0, 0, 0, 0.5)'
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.8)'
                       }}
                     >
-                      {student?.name}
+                      <div className="relative z-10">
+                        {student?.name}
+                      </div>
+                      <div 
+                        className="absolute inset-0 opacity-60"
+                        style={{
+                          backgroundColor: section.color
+                        }}
+                      />
                     </div>
                   ))}
               </div>
