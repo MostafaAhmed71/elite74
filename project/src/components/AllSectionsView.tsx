@@ -10,6 +10,18 @@ interface AllSectionsViewProps {
 const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
   const navigate = useNavigate();
 
+  // تحويل اللون إلى صيغة HSL وتعديل السطوع
+  const adjustColor = (color: string) => {
+    // إزالة الـ #
+    const hex = color.replace('#', '');
+    // تحويل اللون إلى RGB
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    // إرجاع اللون بتعتيم 40%
+    return `rgba(${r}, ${g}, ${b}, 0.9)`;
+  };
+
   return (
     <div className="min-h-screen" dir="rtl">
       {/* Header */}
@@ -45,17 +57,13 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                   .map((student, index) => (
                     <div 
                       key={student?.id || index} 
-                      className="relative"
+                      className="p-2.5 rounded-lg text-white text-sm font-bold relative overflow-hidden"
+                      style={{ 
+                        background: `linear-gradient(45deg, ${adjustColor(section.color)} 0%, ${section.color} 100%)`,
+                        border: `1px solid ${section.color}`
+                      }}
                     >
-                      <div 
-                        className="absolute inset-0 rounded-lg"
-                        style={{ backgroundColor: section.color }}
-                      />
-                      <div 
-                        className="p-2.5 rounded-lg text-white text-sm font-bold relative z-10"
-                      >
-                        {student?.name}
-                      </div>
+                      {student?.name}
                     </div>
                   ))}
               </div>
