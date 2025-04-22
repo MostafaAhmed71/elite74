@@ -14,13 +14,19 @@ function App() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [adminKeyPressed, setAdminKeyPressed] = useState(0);
 
+  console.log('Sections in App:', sections);
+
   useEffect(() => {
     // تحميل البيانات وبدء التحديث التلقائي عند تحميل التطبيق
+    console.log('Loading initial data...');
     fetchStudents();
     startAutoRefresh();
 
     // إيقاف التحديث التلقائي عند إغلاق التطبيق
-    return () => stopAutoRefresh();
+    return () => {
+      console.log('Cleaning up...');
+      stopAutoRefresh();
+    };
   }, [startAutoRefresh, stopAutoRefresh, fetchStudents]);
 
   useEffect(() => {

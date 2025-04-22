@@ -109,35 +109,42 @@ const createStudentStore: StateCreator<StudentStore> = (set, get) => {
 
         console.log('تم جلب الطلاب:', students);
 
-        const sections = initialSections.map(section => ({
+        // نسخة جديدة من الأقسام مع الطلاب المحدثين
+        const updatedSections = initialSections.map(section => ({
           ...section,
           students: Array(15).fill(null),
         }));
 
+        console.log('الأقسام قبل التحديث:', updatedSections);
+
+        // تحديث مواقع الطلاب
         students?.forEach(student => {
-          const sectionIndex = sections.findIndex(s => s.id === student.section);
+          const sectionIndex = updatedSections.findIndex(s => s.id === student.section);
           if (sectionIndex !== -1 && student.position > 0 && student.position <= 15) {
-            sections[sectionIndex].students[student.position - 1] = {
+            updatedSections[sectionIndex].students[student.position - 1] = {
               id: student.id,
               name: student.name,
             };
           }
         });
 
-        set({ sections });
-        
-        await get().autoGitUpdate();
+        console.log('الأقسام بعد التحديث:', updatedSections);
+
+        // تحديث الحالة
+        set({ sections: updatedSections });
       } catch (error) {
         console.error('خطأ في جلب الطلاب:', error);
       }
     },
 
     startAutoRefresh: () => {
+      console.log('بدء التحديث التلقائي...');
       setupRealtimeSubscription();
       get().fetchStudents(); // جلب البيانات الأولية
     },
 
     stopAutoRefresh: () => {
+      console.log('إيقاف التحديث التلقائي...');
       if (subscription) {
         subscription.unsubscribe();
         subscription = null;
