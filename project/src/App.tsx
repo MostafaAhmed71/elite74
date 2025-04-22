@@ -81,9 +81,10 @@ function App() {
           }}
         />
         {showAdmin && (
-          <div className="fixed bottom-4 left-4 z-50">
-            <RegistrationForm onAddStudent={handleAddStudent} />
-          </div>
+          <RegistrationForm 
+            onAddStudent={handleAddStudent} 
+            onClose={() => setShowAdmin(false)}
+          />
         )}
       </div>
     </SectionProvider>

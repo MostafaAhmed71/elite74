@@ -9,6 +9,7 @@ interface RegistrationFormProps {
     success: boolean;
     message?: string;
   }>;
+  onClose: () => void;
   className?: string;
 }
 
@@ -19,7 +20,7 @@ interface StudentListItem {
   position: number;
 }
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({ onAddStudent }) => {
+const RegistrationForm: React.FC<RegistrationFormProps> = ({ onAddStudent, onClose }) => {
   const [name, setName] = useState('');
   const [section, setSection] = useState<SectionType>('elementary');
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -133,122 +134,126 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onAddStudent }) => 
   };
 
   return (
-    <div className="space-y-6" dir="rtl">
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="flex items-center justify-center mb-5">
-          <ClipboardList className="h-8 w-8 text-indigo-600 mr-2" />
-          <h2 className="text-2xl font-bold text-gray-800">شاشة التسجيل</h2>
-        </div>
-        
-        {alert && (
-          <div 
-            className={`mb-4 p-3 rounded-md text-center text-white ${
-              alert.type === 'success' ? 'bg-green-500' : 'bg-red-500'
-            }`}
-            role="alert"
-          >
-            {alert.message}
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50" dir="rtl">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-auto mx-4">
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <ClipboardList className="h-8 w-8 text-indigo-600 mr-2" />
+            <h2 className="text-2xl font-bold text-gray-800">شاشة التسجيل</h2>
           </div>
-        )}
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-gray-700 font-medium mb-1">
-              الاسم
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
-              placeholder="أدخل الاسم هنا"
-              required
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="section" className="block text-gray-700 font-medium mb-1">
-              القسم
-            </label>
-            <select
-              id="section"
-              value={section}
-              onChange={(e) => setSection(e.target.value as SectionType)}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors bg-white"
-            >
-              <option value="elementary">الابتدائي</option>
-              <option value="middle">المتوسط</option>
-              <option value="secondary">الثانوي</option>
-              <option value="universal">العالمي</option>
-            </select>
-          </div>
-          
           <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           >
-            حفظ
+            <X className="h-6 w-6 text-gray-500" />
           </button>
-        </form>
-      </div>
+        </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-4">قائمة الطلاب</h3>
-        <div className="space-y-2">
-          {students.map((student) => (
-            <div key={student.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-md">
-              <div className="flex-1">
-                {editingId === student.id ? (
+        <div className="p-6 space-y-6">
+          {alert && (
+            <div 
+              className={`mb-4 p-3 rounded-md text-center text-white ${
+                alert.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+              }`}
+              role="alert"
+            >
+              {alert.message}
+            </div>
+          )}
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-gray-700 font-medium mb-1">
+                    الاسم
+                  </label>
                   <input
                     type="text"
-                    value={editName}
-                    onChange={(e) => setEditName(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+                    placeholder="أدخل الاسم هنا"
+                    required
                   />
-                ) : (
-                  <div>
-                    <span className="font-medium">{student.name}</span>
-                    <span className="text-sm text-gray-500 mr-2">
-                      ({getSectionName(student.section)} - {student.position})
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleEdit(student.id)}
-                  className="p-2 text-blue-600 hover:bg-blue-50 rounded-md"
-                  disabled={isDeleting}
-                >
-                  {editingId === student.id ? (
-                    <Check className="h-5 w-5" />
-                  ) : (
-                    <Pencil className="h-5 w-5" />
-                  )}
-                </button>
-                {editingId === student.id && (
-                  <button
-                    onClick={() => {
-                      setEditingId(null);
-                      setEditName('');
-                    }}
-                    className="p-2 text-gray-600 hover:bg-gray-100 rounded-md"
-                    disabled={isDeleting}
+                </div>
+                
+                <div>
+                  <label htmlFor="section" className="block text-gray-700 font-medium mb-1">
+                    القسم
+                  </label>
+                  <select
+                    id="section"
+                    value={section}
+                    onChange={(e) => setSection(e.target.value as SectionType)}
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors bg-white"
                   >
-                    <X className="h-5 w-5" />
-                  </button>
-                )}
+                    <option value="elementary">الابتدائي</option>
+                    <option value="middle">المتوسط</option>
+                    <option value="secondary">الثانوي</option>
+                    <option value="universal">العالمي</option>
+                  </select>
+                </div>
+                
                 <button
-                  onClick={() => handleDelete(student.id)}
-                  className="p-2 text-red-600 hover:bg-red-50 rounded-md"
-                  disabled={isDeleting}
+                  type="submit"
+                  className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  <Trash2 className="h-5 w-5" />
+                  حفظ
                 </button>
+              </form>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-4">قائمة الطلاب</h3>
+              <div className="space-y-2 max-h-[50vh] overflow-auto">
+                {students.map((student) => (
+                  <div key={student.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                    <div className="flex-1">
+                      {editingId === student.id ? (
+                        <input
+                          type="text"
+                          value={editName}
+                          onChange={(e) => setEditName(e.target.value)}
+                          className="w-full p-2 border border-gray-300 rounded"
+                          autoFocus
+                        />
+                      ) : (
+                        <div>
+                          <span className="font-medium">{student.name}</span>
+                          <span className="text-gray-500 text-sm mr-2">
+                            ({getSectionName(student.section)})
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center space-x-2 space-x-reverse">
+                      <button
+                        onClick={() => handleEdit(student.id)}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                        title={editingId === student.id ? "حفظ" : "تعديل"}
+                      >
+                        {editingId === student.id ? (
+                          <Check className="h-5 w-5" />
+                        ) : (
+                          <Pencil className="h-5 w-5" />
+                        )}
+                      </button>
+                      <button
+                        onClick={() => handleDelete(student.id)}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors"
+                        title="حذف"
+                        disabled={isDeleting}
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>
