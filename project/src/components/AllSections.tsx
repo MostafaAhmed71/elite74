@@ -38,8 +38,8 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
                 <div 
                   className="p-8"
                   style={{ 
-                    backgroundColor: `${section.color}66`,
-                    boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.3)'
+                    backgroundColor: `${section.color}99`,
+                    boxShadow: 'inset 0 0 50px rgba(0, 0, 0, 0.5)'
                   }}
                 >
                   <div className="flex items-center mb-4">
