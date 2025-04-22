@@ -169,16 +169,16 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                       {student.name}
                     </div>
                     <div className="text-white/60 text-sm mb-2">
-                      طالب مسجل
+                      
                     </div>
                   </div>
                 ) : (
                   <div className="text-center">
                     <div className="text-lg text-white/60 font-medium mb-2">
-                      مقعد شاغر
+                     
                     </div>
                     <div className="text-white/40 text-sm">
-                      متاح للتسجيل
+                     
                     </div>
                   </div>
                 )}

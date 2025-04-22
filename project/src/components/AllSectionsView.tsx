@@ -51,11 +51,6 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                       {student?.name}
                     </div>
                   ))}
-                {section.students.filter(student => student).length === 0 && (
-                  <div className="text-white/60 text-center p-4 bg-white/5 rounded-lg">
-                    لا يوجد طلاب في هذا القسم
-                  </div>
-                )}
               </div>
             </div>
           ))}

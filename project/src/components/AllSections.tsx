@@ -44,13 +44,8 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
                 >
                   <div className="flex items-center mb-4">
                     <Users className="w-8 h-8 text-white ml-3" />
-                    <div>
-                      <div className="text-white font-bold text-xl">
-                        {section.students.filter(s => s).length} طالب
-                      </div>
-                      <div className="text-white/90 text-lg">
-                        {section.students.filter(s => !s).length} مقعد متاح
-                      </div>
+                    <div className="text-white font-bold text-xl">
+                      {section.students.filter(s => s).length}
                     </div>
                   </div>
                   <div className="mt-4 text-white/90 group-hover:text-white flex items-center justify-center transition-colors">
