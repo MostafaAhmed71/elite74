@@ -16,7 +16,7 @@ const initialSections: SectionData[] = [
   {
     id: 'universal',
     title: 'القسم العالمي',
-    color: '#2196F3', // أزرق
+    color: '#f70de9', // أزرق
     students: Array(15).fill(null),
   },
   {
