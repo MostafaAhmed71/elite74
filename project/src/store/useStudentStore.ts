@@ -34,7 +34,7 @@ const initialSections: SectionData[] = [
   {
     id: 'secondary',
     title: 'القسم الثانوي',
-    color: '#9C27B0', // بنفسجي
+    color: '#2196F3', // أزرق
     students: Array(15).fill(null),
   },
 ];
