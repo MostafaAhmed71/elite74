@@ -195,11 +195,13 @@ const createStudentStore: StateCreator<StudentStore> = (set, get) => {
           }
         }
 
-        // تحديث الواجهة
+        // تحديث واجهة المستخدم فوراً
         await get().fetchStudents();
         
-        // تحديث Git بعد حذف الطالب
-        await get().autoGitUpdate();
+        // تحديث Git في الخلفية
+        get().autoGitUpdate().catch(error => {
+          console.error('خطأ في تحديث Git:', error);
+        });
         
         return { success: true, message: 'تم حذف الطالب بنجاح' };
       } catch (error) {
@@ -270,11 +272,13 @@ const createStudentStore: StateCreator<StudentStore> = (set, get) => {
           return { success: false, message: 'حدث خطأ أثناء إضافة الطالب' };
         }
 
-        // تحديث واجهة المستخدم
+        // تحديث واجهة المستخدم فوراً
         await get().fetchStudents();
-
-        // تحديث Git بعد إضافة الطالب
-        await get().autoGitUpdate();
+        
+        // تحديث Git في الخلفية
+        get().autoGitUpdate().catch(error => {
+          console.error('خطأ في تحديث Git:', error);
+        });
         
         return { success: true, message: 'تم إضافة الطالب بنجاح' };
       } catch (error) {
