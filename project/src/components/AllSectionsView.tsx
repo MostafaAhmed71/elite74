@@ -47,19 +47,11 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                       key={student?.id || index} 
                       className="p-2.5 rounded-lg text-white text-sm font-bold hover:bg-white/10 transition-colors relative overflow-hidden"
                       style={{ 
-                        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-                        boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.9)'
+                        backgroundColor: section.color,
+                        boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.3)'
                       }}
                     >
-                      <div className="relative z-10">
-                        {student?.name}
-                      </div>
-                      <div 
-                        className="absolute inset-0 opacity-60"
-                        style={{
-                          backgroundColor: section.color
-                        }}
-                      />
+                      {student?.name}
                     </div>
                   ))}
               </div>
