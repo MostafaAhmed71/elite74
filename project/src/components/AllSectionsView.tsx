@@ -45,7 +45,8 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                   .map((student, index) => (
                     <div 
                       key={student?.id || index} 
-                      className="p-3 bg-white/10 backdrop-blur-sm rounded-lg text-white hover:bg-white/20 transition-colors"
+                      className="p-3 rounded-lg text-white hover:bg-white/20 transition-colors"
+                      style={{ backgroundColor: `${section.color}99` }}
                     >
                       {student?.name}
                     </div>
