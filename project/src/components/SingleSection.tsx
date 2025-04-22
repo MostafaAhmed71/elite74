@@ -124,7 +124,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                 <div className="flex items-center bg-black/20 rounded-lg px-4 py-2">
                   <Users className="w-5 h-5 text-white ml-2" />
                   <span className="text-white font-medium">
-                    {filledSeats} من {totalSeats} طالب
+                    {filledSeats}
                   </span>
                 </div>
                 <div className="flex-1 bg-black/20 rounded-lg p-2">
@@ -168,17 +168,10 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                     <div className="text-xl text-white font-bold mb-2">
                       {student.name}
                     </div>
-                    <div className="text-white/60 text-sm mb-2">
-                      
-                    </div>
                   </div>
                 ) : (
                   <div className="text-center">
                     <div className="text-lg text-white/60 font-medium mb-2">
-                     
-                    </div>
-                    <div className="text-white/40 text-sm">
-                     
                     </div>
                   </div>
                 )}

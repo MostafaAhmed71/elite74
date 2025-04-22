@@ -10,12 +10,6 @@ interface AllSectionsProps {
 const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
   const navigate = useNavigate();
 
-  console.log('Sections in AllSections:', sections);
-
-  // تقسيم الأقسام إلى مجموعتين: الأقسام العادية والأقسام المجمعة
-  const regularSections = sections.slice(0, -4);
-  const combinedSections = sections.slice(-4);
-
   return (
     <div className="min-h-screen flex items-center justify-center" dir="rtl">
       <div className="w-full max-w-6xl mx-auto p-8">
@@ -38,8 +32,8 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
                 <div 
                   className="p-8"
                   style={{ 
-                    backgroundColor: `${section.color}99`,
-                    boxShadow: 'inset 0 0 50px rgba(0, 0, 0, 0.5)'
+                    backgroundColor: `${section.color}66`,
+                    boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.3)'
                   }}
                 >
                   <div className="flex items-center mb-4">
