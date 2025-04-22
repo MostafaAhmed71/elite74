@@ -15,12 +15,13 @@ function App() {
   const [adminKeyPressed, setAdminKeyPressed] = useState(0);
 
   useEffect(() => {
-    // بدء التحديث التلقائي عند تحميل التطبيق
+    // تحميل البيانات وبدء التحديث التلقائي عند تحميل التطبيق
+    fetchStudents();
     startAutoRefresh();
 
     // إيقاف التحديث التلقائي عند إغلاق التطبيق
     return () => stopAutoRefresh();
-  }, [startAutoRefresh, stopAutoRefresh]);
+  }, [startAutoRefresh, stopAutoRefresh, fetchStudents]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
