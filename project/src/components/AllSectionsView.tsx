@@ -45,10 +45,10 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                   .map((student, index) => (
                     <div 
                       key={student?.id || index} 
-                      className="p-2.5 rounded-lg text-white text-sm font-bold hover:bg-white/20 transition-colors relative overflow-hidden"
+                      className="p-2.5 rounded-lg text-white text-sm font-bold hover:bg-white/10 transition-colors relative overflow-hidden"
                       style={{ 
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                        boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.8)'
+                        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                        boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.9)'
                       }}
                     >
                       <div className="relative z-10">
@@ -71,4 +71,4 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
   );
 };
 
-export default AllSectionsView; 
+export default AllSectionsView;
