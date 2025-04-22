@@ -30,11 +30,11 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {sections.map((section) => (
-            <div key={section.id} className="space-y-4">
+            <div key={section.id} className="space-y-3">
               <div 
-                className="text-xl font-bold p-4 rounded-lg text-white text-center"
+                className="text-lg font-bold p-3 rounded-lg text-white text-center"
                 style={{ backgroundColor: section.color }}
               >
                 {section.title}
@@ -46,7 +46,10 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                     <div 
                       key={student?.id || index} 
                       className="p-3 rounded-lg text-white hover:bg-white/20 transition-colors"
-                      style={{ backgroundColor: `${section.color}99` }}
+                      style={{ 
+                        backgroundColor: `${section.color}cc`,
+                        boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.3)'
+                      }}
                     >
                       {student?.name}
                     </div>
