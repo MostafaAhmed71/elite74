@@ -16,7 +16,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
       <div className="bg-white/10 backdrop-blur-sm py-6 sticky top-0 z-10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-white">جميع الطلاب</h2>
+            <h2 className="text-2xl font-bold text-white">عرض الأسماء</h2>
             <button
               onClick={() => navigate('/')}
               className="flex items-center text-white hover:text-white/80 transition-colors"
@@ -45,13 +45,17 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                   .map((student, index) => (
                     <div 
                       key={student?.id || index} 
-                      className="p-2.5 rounded-lg text-white text-sm font-bold"
-                      style={{ 
-                        backgroundColor: section.color,
-                        boxShadow: 'none'
-                      }}
+                      className="relative"
                     >
-                      {student?.name}
+                      <div 
+                        className="absolute inset-0 rounded-lg"
+                        style={{ backgroundColor: section.color }}
+                      />
+                      <div 
+                        className="p-2.5 rounded-lg text-white text-sm font-bold relative z-10"
+                      >
+                        {student?.name}
+                      </div>
                     </div>
                   ))}
               </div>
