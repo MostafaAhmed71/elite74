@@ -19,16 +19,6 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
   return (
     <div className="min-h-screen flex items-center justify-center" dir="rtl">
       <div className="w-full max-w-6xl mx-auto p-8">
-        <div className="text-center mb-12">
-          <button
-            onClick={() => navigate('/all-students')}
-            className="bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg hover:bg-white/20 transition-colors flex items-center mx-auto space-x-2 space-x-reverse"
-          >
-            <Grid className="w-5 h-5 ml-2" />
-            <span>عرض جميع الطلاب</span>
-          </button>
-        </div>
-
         {/* الأقسام */}
         {sections && sections.length > 0 ? (
           <div className="grid grid-cols-2 gap-8 mb-8">
@@ -36,16 +26,19 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
               <Link
                 to={`/section/${section.id}`}
                 key={section.id}
-                className="group block rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-white/10 backdrop-blur-sm"
+                className="group block rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-black/40 backdrop-blur-sm"
               >
                 <div
                   className="p-8 text-white font-bold text-center text-3xl relative"
-                  style={{ backgroundColor: section.color }}
+                  style={{ backgroundColor: `${section.color}dd` }}
                 >
                   <div className="relative z-10 drop-shadow-lg">{section.title}</div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />
                 </div>
-                <div className="p-8">
+                <div 
+                  className="p-8"
+                  style={{ backgroundColor: `${section.color}22` }}
+                >
                   <div className="flex items-center mb-4">
                     <Users className="w-8 h-8 text-white ml-3" />
                     <div>
@@ -72,9 +65,13 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
         )}
 
         <div className="text-center mt-8">
-          <p className="text-white/60 text-lg">
-            النخبة .. ليست مجرد مدرسة
-          </p>
+          <button
+            onClick={() => navigate('/all-students')}
+            className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg hover:bg-white/20 transition-colors flex items-center mx-auto space-x-2 space-x-reverse text-lg"
+          >
+            <Grid className="w-6 h-6 ml-2" />
+            <span>عرض جميع الطلاب</span>
+          </button>
         </div>
       </div>
     </div>
