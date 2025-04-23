@@ -11,9 +11,9 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-900" dir="rtl">
+    <div className="min-h-screen" dir="rtl">
       {/* Header */}
-      <div className="bg-gray-800/80 backdrop-blur-sm py-6 sticky top-0 z-10 border-b border-gray-700">
+      <div className="bg-white/5 backdrop-blur-sm py-6 sticky top-0 z-10 border-b border-white/10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -22,7 +22,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
             </div>
             <button
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
             >
               <ArrowRight className="h-5 w-5" />
               <span>العودة للرئيسية</span>
@@ -37,7 +37,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
           {sections.map((section) => (
             <div 
               key={section.id} 
-              className="bg-gray-800 rounded-xl overflow-hidden border border-gray-700"
+              className="backdrop-blur-sm bg-white/5 rounded-xl overflow-hidden border border-white/10"
             >
               {/* Section Header */}
               <div 
@@ -62,7 +62,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                     .map((student, index) => (
                       <div 
                         key={student?.id || index}
-                        className="bg-gray-900/95 p-3 rounded-lg flex items-center gap-3 group hover:bg-gray-900/90"
+                        className="bg-white/5 backdrop-blur-sm p-3 rounded-lg flex items-center gap-3 group hover:bg-white/10 transition-all duration-300"
                       >
                         <div 
                           className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0"
@@ -98,17 +98,17 @@ styleSheet.textContent = `
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #1f2937;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #4b5563;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #6b7280;
+    background: rgba(255, 255, 255, 0.3);
   }
 `;
 document.head.appendChild(styleSheet);
