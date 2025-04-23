@@ -148,7 +148,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                 className={`
                   relative p-6 rounded-xl
                   ${student
-                    ? 'bg-gray-800/95 shadow-lg hover:bg-gray-800/90'
+                    ? 'bg-gray-900/95 shadow-lg hover:bg-gray-900/90'
                     : 'bg-white/5 border-2 border-dashed border-white/20'
                   }
                   transition-all duration-300 group
@@ -160,14 +160,14 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                       <div 
                         className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold shrink-0"
                         style={{ 
-                          backgroundColor: `${section.color}22`,
+                          backgroundColor: `${section.color}33`,
                           color: section.color
                         }}
                       >
                         {index + 1}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-white font-bold text-lg mb-1 truncate">
+                        <h3 className="text-white font-bold text-lg mb-1 truncate tracking-wide">
                           {student.name}
                         </h3>
                         <div className="flex items-center gap-2">
@@ -175,7 +175,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                             className="w-2 h-2 rounded-full"
                             style={{ backgroundColor: section.color }}
                           />
-                          <span className="text-white/60 text-sm">
+                          <span className="text-white/70 text-sm">
                             متأهل
                           </span>
                         </div>
