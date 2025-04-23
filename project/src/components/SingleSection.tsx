@@ -148,7 +148,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                 className={`
                   relative p-6 rounded-xl
                   ${student
-                    ? 'bg-gradient-to-br from-white/10 to-white/5 shadow-lg hover:from-white/15 hover:to-white/10'
+                    ? 'bg-gray-800/95 shadow-lg hover:bg-gray-800/90'
                     : 'bg-white/5 border-2 border-dashed border-white/20'
                   }
                   transition-all duration-300 group
