@@ -146,42 +146,55 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
               <div
                 key={`${section.id}-slot-${index}`}
                 className={`
-                  relative p-6 rounded-xl flex flex-col items-center justify-center
-                  min-h-[200px] transition-all duration-300 transform hover:scale-105
+                  relative p-6 rounded-xl
                   ${student
-                    ? 'bg-white/10 backdrop-blur-sm shadow-lg'
+                    ? 'bg-gradient-to-br from-white/10 to-white/5 shadow-lg hover:from-white/15 hover:to-white/10'
                     : 'bg-white/5 border-2 border-dashed border-white/20'
                   }
+                  transition-all duration-300 group
                 `}
               >
-                <div 
-                  className={`
-                    w-16 h-16 mb-4 rounded-full flex items-center justify-center text-2xl font-bold
-                    ${student ? 'bg-white/20' : 'bg-white/5'}
-                  `}
-                  style={{ color: section.color }}
-                >
-                  {index + 1}
-                </div>
                 {student ? (
-                  <div className="text-center relative">
-                    <div className="text-xl text-white font-bold mb-2">
-                      {student.name}
+                  <>
+                    <div className="flex items-start gap-4">
+                      <div 
+                        className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold shrink-0"
+                        style={{ 
+                          backgroundColor: `${section.color}22`,
+                          color: section.color
+                        }}
+                      >
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-white font-bold text-lg mb-1 truncate">
+                          {student.name}
+                        </h3>
+                        <div className="flex items-center gap-2">
+                          <div 
+                            className="w-2 h-2 rounded-full"
+                            style={{ backgroundColor: section.color }}
+                          />
+                          <span className="text-white/60 text-sm">
+                            متأهل
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                    <button
+                      onClick={() => handleDelete(student, index)}
+                      className="absolute top-3 left-3 p-1.5 rounded-lg bg-white/5 text-white/40 
+                               opacity-0 group-hover:opacity-100 hover:bg-red-500/20 hover:text-red-500 
+                               transition-all duration-300"
+                      title="حذف الطالب"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </>
                 ) : (
-                  <div className="text-center">
-                    <div className="text-lg text-white/60 font-medium mb-2">
-                    </div>
+                  <div className="flex items-center justify-center h-[76px]">
+                    <span className="text-white/40 text-sm">مقعد شاغر</span>
                   </div>
-                )}
-                {student && (
-                  <div 
-                    className="absolute inset-0 rounded-xl opacity-10"
-                    style={{
-                      background: `radial-gradient(circle at center, ${section.color} 0%, transparent 70%)`
-                    }}
-                  />
                 )}
               </div>
             ))}
