@@ -20,26 +20,21 @@ const AllSections: React.FC<AllSectionsProps> = ({ sections }) => {
               <Link
                 to={`/section/${section.id}`}
                 key={section.id}
-                className="group block rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-black/40 backdrop-blur-sm"
+                className="group block rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-white/5 backdrop-blur-sm"
               >
                 <div
                   className="p-8 text-white font-bold text-center text-3xl relative"
-                  style={{ backgroundColor: `${section.color}dd` }}
+                  style={{ backgroundColor: section.color }}
                 >
                   <div className="relative z-10 drop-shadow-lg">{section.title}</div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />
                 </div>
                 <div 
-                  className="p-8"
-                  style={{ 
-                    backgroundColor: `${section.color}66`,
-                    boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.3)'
-                  }}
+                  className="p-8 bg-white/10 backdrop-blur-sm"
                 >
                   <div className="flex items-center mb-4">
                     <Users className="w-8 h-8 text-white ml-3" />
                     <div className="text-white font-bold text-xl">
-                      {section.students.filter(s => s).length}
+                      {section.students.filter(s => s).length} طالب
                     </div>
                   </div>
                   <div className="mt-4 text-white/90 group-hover:text-white flex items-center justify-center transition-colors">
