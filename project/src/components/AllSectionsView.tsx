@@ -37,7 +37,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                     .map((student, index) => (
                       <div 
                         key={student?.id || index}
-                        className="bg-black/20 backdrop-blur-sm p-3 rounded-lg flex items-center gap-3"
+                        className="bg-black/40 backdrop-blur-sm p-3 rounded-lg flex items-center gap-3"
                       >
                         <div 
                           className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold"
@@ -48,7 +48,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                         >
                           {index + 1}
                         </div>
-                        <span className="text-white text-sm">
+                        <span className="text-white text-sm font-bold">
                           {student?.name}
                         </span>
                       </div>
