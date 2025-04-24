@@ -69,7 +69,6 @@ function App() {
         <Routes>
           <Route path="/" element={<AllSections sections={sections} />} />
           <Route path="/section/:sectionId" element={<SingleSection sections={sections} />} />
-          <Route path="/all-students" element={<AllSectionsView sections={sections} />} />
         </Routes>
         <Toaster 
           position="top-center"
@@ -89,6 +88,9 @@ function App() {
           />
         )}
       </div>
+      <Routes>
+        <Route path="/all-students" element={<AllSectionsView sections={sections} />} />
+      </Routes>
     </SectionProvider>
   );
 }
