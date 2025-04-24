@@ -1,7 +1,7 @@
 //صفحة خاصة بعرض جميع الطلاب
 import React from 'react';
 import { SectionData } from '../types';
-import { ArrowRight, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface AllSectionsViewProps {
@@ -12,15 +12,8 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen" dir="rtl">
-      <div className="container mx-auto p-6">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors mb-6"
-        >
-          <ArrowRight className="h-5 w-5" />
-          <span>العودة للرئيسية</span>
-        </button>
+    <div className="min-h-screen bg-gray-900" dir="rtl">
+      <div className="container mx-auto py-6">
         <div className="grid grid-cols-4 gap-6">
           {sections.map((section) => (
             <div 
