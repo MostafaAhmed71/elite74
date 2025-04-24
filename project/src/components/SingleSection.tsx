@@ -1,3 +1,4 @@
+//صفحة خاصة بعرض الطلاب فى قسم معين
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { SectionData, Student, SectionType } from '../types';
@@ -141,12 +142,12 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
           </div>
 
           {/* قائمة الطلاب */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-5 gap-4">
             {section.students.map((student, index) => (
               <div
                 key={`${section.id}-slot-${index}`}
                 className={`
-                  relative p-6 rounded-xl
+                  relative p-6 rounded-xl min-h-[120px]
                   ${student
                     ? 'bg-gray-900/95 shadow-lg hover:bg-gray-900/90'
                     : 'bg-white/5 border-2 border-dashed border-white/20'
@@ -156,9 +157,9 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
               >
                 {student ? (
                   <>
-                    <div className="flex items-start gap-4">
+                    <div className="flex flex-col h-full">
                       <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold shrink-0"
+                        className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold mb-3"
                         style={{ 
                           backgroundColor: `${section.color}33`,
                           color: section.color
@@ -166,8 +167,8 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                       >
                         {index + 1}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-white font-bold text-lg mb-1 truncate tracking-wide">
+                      <div className="flex-1">
+                        <h3 className="text-white font-bold text-base mb-1 break-words">
                           {student.name}
                         </h3>
                         <div className="flex items-center gap-2">
@@ -192,7 +193,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                     </button>
                   </>
                 ) : (
-                  <div className="flex items-center justify-center h-[76px]">
+                  <div className="flex items-center justify-center h-full">
                     <span className="text-white/40 text-sm">مقعد شاغر</span>
                   </div>
                 )}
