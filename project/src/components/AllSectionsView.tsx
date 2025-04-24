@@ -18,9 +18,8 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
           {sections.map((section) => (
             <div 
               key={section.id} 
-              className="backdrop-blur-sm bg-white/5 rounded-xl overflow-hidden border border-white/10"
+              className="backdrop-blur-sm bg-white/5 rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
             >
-              {/* Section Header */}
               <div 
                 className="py-4 px-6"
                 style={{ 
@@ -35,9 +34,8 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
                 </div>
               </div>
               
-              {/* Students List */}
               <div className="p-4">
-                <div className="space-y-2 max-h-[calc(100vh-250px)] overflow-y-auto custom-scrollbar">
+                <div className="space-y-2 max-h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar">
                   {section.students
                     .filter(student => student)
                     .map((student, index) => (
