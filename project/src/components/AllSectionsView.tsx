@@ -1,3 +1,4 @@
+//صفحة خاصة بعرض جميع الطلاب
 import React from 'react';
 import { SectionData } from '../types';
 import { ArrowRight, Users } from 'lucide-react';
@@ -12,27 +13,14 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
 
   return (
     <div className="min-h-screen" dir="rtl">
-      {/* Header */}
-      <div className="bg-white/5 backdrop-blur-sm py-6 sticky top-0 z-10 border-b border-white/10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Users className="h-7 w-7 text-white" />
-              <h2 className="text-2xl font-bold text-white">عرض الأسماء</h2>
-            </div>
-            <button
-              onClick={() => navigate('/')}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
-            >
-              <ArrowRight className="h-5 w-5" />
-              <span>العودة للرئيسية</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
       <div className="container mx-auto p-6">
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors mb-6"
+        >
+          <ArrowRight className="h-5 w-5" />
+          <span>العودة للرئيسية</span>
+        </button>
         <div className="grid grid-cols-4 gap-6">
           {sections.map((section) => (
             <div 
