@@ -9,7 +9,7 @@ interface AllSectionsViewProps {
 const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
   return (
     <div className="min-h-screen bg-black/50">
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto py-24 px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {sections.map((section) => (
             <div 
