@@ -27,43 +27,45 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
               key={section.id} 
               className="backdrop-blur-sm bg-white/5 rounded-lg overflow-hidden border border-white/10"
             >
-              <div 
-                className="p-4 sticky top-0 z-10"
-                style={{ 
-                  backgroundColor: section.color,
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-white">{section.title}</h3>
-                  <span className="text-white text-sm bg-black/20 px-2 py-1 rounded-full">
-                    {section.students.filter(s => s).length}
-                  </span>
+              <div className="flex flex-col md:flex-row">
+                <div 
+                  className="p-4 md:w-48 flex-shrink-0"
+                  style={{ 
+                    backgroundColor: section.color,
+                  }}
+                >
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <h3 className="text-lg font-bold text-white text-center mb-2">{section.title}</h3>
+                    <span className="text-white text-sm bg-black/20 px-2 py-1 rounded-full">
+                      {section.students.filter(s => s).length}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="p-4">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
-                  {section.students
-                    .filter(student => student)
-                    .map((student, index) => (
-                      <div 
-                        key={student?.id || index}
-                        className="bg-black/40 backdrop-blur-sm p-3 rounded-lg flex flex-row-reverse items-center gap-3 hover:bg-black/50 transition-colors"
-                      >
+                
+                <div className="p-4 flex-grow">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+                    {section.students
+                      .filter(student => student)
+                      .map((student, index) => (
                         <div 
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold"
-                          style={{ 
-                            backgroundColor: section.color,
-                            color: '#fff'
-                          }}
+                          key={student?.id || index}
+                          className="bg-black/40 backdrop-blur-sm p-3 rounded-lg flex flex-row-reverse items-center gap-3 hover:bg-black/50 transition-colors"
                         >
-                          {index + 1}
+                          <div 
+                            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold"
+                            style={{ 
+                              backgroundColor: section.color,
+                              color: '#fff'
+                            }}
+                          >
+                            {index + 1}
+                          </div>
+                          <span className="text-white text-sm font-bold text-right">
+                            {student?.name}
+                          </span>
                         </div>
-                        <span className="text-white text-sm font-bold text-right">
-                          {student?.name}
-                        </span>
-                      </div>
-                    ))}
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
