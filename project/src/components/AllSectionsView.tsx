@@ -21,7 +21,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
           <ArrowRight className="h-5 w-5" />
           <span>العودة للرئيسية</span>
         </button>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-8">
           {sections.map((section) => (
             <div 
               key={section.id} 
@@ -42,7 +42,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
               </div>
               
               <div className="p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                   {section.students
                     .filter(student => student)
                     .map((student, index) => (
