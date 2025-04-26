@@ -27,7 +27,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
               key={section.id} 
               className="backdrop-blur-sm bg-white/5 rounded-lg overflow-hidden border border-white/10"
             >
-              <div className="flex flex-col md:flex-row">
+              <div className="flex flex-col md:flex-row-reverse">
                 <div 
                   className="p-4 md:w-48 flex-shrink-0"
                   style={{ 
