@@ -21,14 +21,14 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
           <ArrowRight className="h-5 w-5" />
           <span>العودة للرئيسية</span>
         </button>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {sections.map((section) => (
             <div 
               key={section.id} 
               className="backdrop-blur-sm bg-white/5 rounded-lg overflow-hidden border border-white/10"
             >
               <div 
-                className="p-4"
+                className="p-4 sticky top-0 z-10"
                 style={{ 
                   backgroundColor: section.color,
                 }}
@@ -42,13 +42,13 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
               </div>
               
               <div className="p-4">
-                <div className="space-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {section.students
                     .filter(student => student)
                     .map((student, index) => (
                       <div 
                         key={student?.id || index}
-                        className="bg-black/40 backdrop-blur-sm p-3 rounded-lg flex flex-row-reverse items-center gap-3"
+                        className="bg-black/40 backdrop-blur-sm p-3 rounded-lg flex flex-row-reverse items-center gap-3 hover:bg-black/50 transition-colors"
                       >
                         <div 
                           className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold"
