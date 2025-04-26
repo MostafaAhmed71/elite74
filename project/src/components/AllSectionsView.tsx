@@ -21,7 +21,7 @@ const AllSectionsView: React.FC<AllSectionsViewProps> = ({ sections }) => {
           <ArrowRight className="h-5 w-5" />
           <span>العودة للرئيسية</span>
         </button>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-16">
           {sections.map((section) => (
             <div 
               key={section.id} 
